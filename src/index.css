@@ -1,0 +1,23 @@
+.mainContainer{
+    background-image: url("./images/bg4.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 99vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.shoeLogo {
+    width: 180px;
+    height: 100px;
+}
+.footerSticky{
+    /* position: sticky; */
+    /* bottom: 0px; */
+}
+.signupbtn{
+    border: 2px solid red;
+    padding: 15px;
+    border-radius: 20px;
+    background: white;
+}
