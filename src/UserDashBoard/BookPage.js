@@ -96,6 +96,51 @@ const BookPage = () => {
 
     }
 
+
+    const initPayment = (data) => {
+      const options = {
+        key: "rzp_test_WDciMXfQmSouR9",
+        amount: data.amount,
+        currency: data.currency,
+        name: selectedProduct.shoeName,
+        description: "Test Transaction",
+        image: selectedProduct.shoewImage,
+        order_id: data.id,
+        handler: async (response) => {
+          try {
+            const verifyUrl = "http://localhost:7000/api/payment/verify";
+            const { data } = await axios.post(verifyUrl, response);
+            console.log(data);
+          } catch (error) {
+            console.log(error);
+          }
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      const rzp1 = new window.Razorpay(options);
+      rzp1.open();
+    };
+  
+    const handlePayment = async () => {
+      try {
+        const orderUrl = "https://shoe-ecommerce-website.herokuapp.com/api/payment/orders";
+        const { data } = await axios.post(orderUrl, { amount: selectedProduct.shoePrice * selectedProduct.qty });
+        console.log(data);
+        initPayment(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+
+
+    const DoubleBook = () => {
+      bookProduct()
+      // handlePayment()
+    }
+
   return (
     <Box>
       <UHeader>
@@ -149,7 +194,7 @@ const BookPage = () => {
 
               <Box mt={4}>
                 <Button colorScheme="blue" size="md" mr={4} 
-                onClick={bookProduct}
+                onClick={DoubleBook}
                 >
                   Book
                 </Button>
